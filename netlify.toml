@@ -6,7 +6,11 @@
 [build.environment]
   REACT_APP_PROXY = "https://todo-list-demo-e11643ecaddb.herokuapp.com"
 
-# SPA 라우팅을 위한 설정
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-proxy/api/:splat"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
