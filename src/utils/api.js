@@ -8,6 +8,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // CORS credentials 지원
 });
 /**
  * console.log all requests and responses
