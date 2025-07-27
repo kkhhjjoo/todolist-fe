@@ -1,11 +1,13 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://todo-list-demo-e11643ecaddb.herokuapp.com/api',
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? 'https://todo-list-demo-e11643ecaddb.herokuapp.com/api'
+      : 'http://localhost:4000/api',
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true, // CORS credentials 지원
 });
 /**
  * console.log all requests and responses
