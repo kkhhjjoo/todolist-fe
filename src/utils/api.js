@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `${process.env.REACT_APP_PROXY || 'http://localhost:4000'}/api`,
+  baseURL: 'https://todo-list-demo-e11643ecaddb.herokuapp.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
