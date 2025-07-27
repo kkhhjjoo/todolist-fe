@@ -1,17 +1,10 @@
 [build]
   command = "npm run build"
   publish = "build"
+  functions = "netlify/functions"
 
 [build.environment]
   REACT_APP_PROXY = "https://todo-list-demo-e11643ecaddb.herokuapp.com"
-
-# API 프록시 설정
-[[redirects]]
-  from = "/api/*"
-  to = "https://todo-list-demo-e11643ecaddb.herokuapp.com/api/:splat"
-  status = 200
-  force = true
-  headers = {Access-Control-Allow-Origin = "*", Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS", Access-Control-Allow-Headers = "Content-Type, Authorization"}
 
 # SPA 라우팅을 위한 설정
 [[redirects]]

@@ -3,7 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? 'https://todo-list-demo-e11643ecaddb.herokuapp.com/api'
+      ? '/.netlify/functions/api-proxy/api'
       : 'http://localhost:4000/api',
   headers: {
     'Content-Type': 'application/json',
