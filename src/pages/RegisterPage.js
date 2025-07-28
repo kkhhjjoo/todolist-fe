@@ -1,35 +1,41 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   return (
-    <div className="display-center">
-      <Form className="login-box">
+    <div className='display-center'>
+      <Form className='login-box'>
         <h1>회원가입</h1>
-        <Form.Group className="mb-3" controlId="formName">
+        <Form.Group className='mb-3' controlId='formName'>
           <Form.Label>Name</Form.Label>
-          <Form.Control type="string" placeholder="Name" />
+          <Form.Control type='string' placeholder='Name' />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type='email' placeholder='Enter email' />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type='password' placeholder='Password' />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>re-enter the password</Form.Label>
-          <Form.Control type="password" placeholder="re-enter the password" />
+          <Form.Control type='password' placeholder='re-enter the password' />
         </Form.Group>
 
-        <Button className="button-primary" type="submit">
-          회원가입
-        </Button>
+        <div className='button-box'>
+          <Button className='button-primary' type='submit'>
+            회원가입
+          </Button>
+          <span>
+            이미 계정이 있다면? <Link to='/login'>로그인 하기</Link>
+          </span>
+        </div>
       </Form>
     </div>
   );
