@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import TodoBoard from "../components/TodoBoard";
-import api from "../utils/api";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import React, { useEffect, useState } from 'react';
+import TodoBoard from '../components/TodoBoard';
+import api from '../utils/api';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import { useNavigate } from 'react-router-dom';
 
-const TodoPage = () => {
+const TodoPage = ({ user, setUser }) => {
   const [todoList, setTodoList] = useState([]);
-  const [todoValue, setTodoValue] = useState("");
+  const [todoValue, setTodoValue] = useState('');
 
   const getTasks = async () => {
-    const response = await api.get("/tasks");
-    console.log('taskList',response.data.data);
+    const response = await api.get('/tasks');
+    console.log('taskList', response.data.data);
     setTodoList(response.data.data);
   };
   useEffect(() => {
@@ -19,16 +20,16 @@ const TodoPage = () => {
   }, []);
   const addTodo = async () => {
     try {
-      const response = await api.post("/tasks", {
+      const response = await api.post('/tasks', {
         task: todoValue,
         isComplete: false,
       });
       if (response.status === 200) {
         getTasks();
       }
-      setTodoValue("");
+      setTodoValue('');
     } catch (error) {
-      console.log("error:", error);
+      console.log('error:', error);
     }
   };
 
@@ -40,7 +41,7 @@ const TodoPage = () => {
         getTasks();
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -54,23 +55,45 @@ const TodoPage = () => {
         getTasks();
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    if (api.defaults.headers['authorization']) {
+      delete api.defaults.headers['authorization'];
+    }
+    setUser(null);
+    navigate('/login');
+  };
+
   return (
     <Container>
-      <Row className="add-item-row">
+      <Row className='align-items-center mb-3'>
+        <Col>
+          <h2>Todo List</h2>
+        </Col>
+        <Col className='text-end'>
+          <button onClick={handleLogout} className='btn btn-outline-secondary'>
+            로그아웃
+          </button>
+        </Col>
+      </Row>
+      <Row className='add-item-row'>
         <Col xs={12} sm={10}>
           <input
-            type="text"
-            placeholder="할일을 입력하세요"
+            type='text'
+            placeholder='할일을 입력하세요'
             onChange={(event) => setTodoValue(event.target.value)}
-            className="input-box"
+            className='input-box'
             value={todoValue}
           />
         </Col>
         <Col xs={12} sm={2}>
-          <button onClick={addTodo} className="button-add">
+          <button onClick={addTodo} className='button-add'>
             추가
           </button>
         </Col>
