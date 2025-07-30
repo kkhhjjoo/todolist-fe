@@ -9,11 +9,14 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-/**
- * console.log all requests and responses
- */
+
+// 요청 인터셉터에서 항상 최신 토큰을 헤더에 추가
 api.interceptors.request.use(
   (request) => {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      request.headers['authorization'] = 'Bearer ' + token;
+    }
     console.log('Starting Request', request);
     return request;
   },
